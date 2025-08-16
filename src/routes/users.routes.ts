@@ -32,9 +32,6 @@ function validateObjectIdParam(req: Request, res: Response, next: NextFunction) 
 
 const router = Router();
 
-/** Ping (לניטור מהיר) */
-router.get("/ping", (_req, res) => res.json({ ok: true }));
-
 /** Register (public) */
 router.post("/", validate(registerUserSchema), registerUser);
 

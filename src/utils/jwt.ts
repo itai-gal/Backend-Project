@@ -1,6 +1,10 @@
 import jwt, { SignOptions, Secret } from "jsonwebtoken";
+import dotenv from "dotenv";
 
-const JWT_SECRET: Secret = (process.env.JWT_SECRET as Secret) || "Vilage_Ozora";
+
+dotenv.config();
+
+const JWT_SECRET: Secret = (process.env.JWT_SECRET as Secret) || "dev_secret_change_me";
 
 export type JwtPayload = {
     userId: string;

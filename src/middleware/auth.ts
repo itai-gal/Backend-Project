@@ -18,23 +18,18 @@ type TokenPayload = {
 export default function auth(req: Request, res: Response, next: NextFunction) {
     try {
         const header = req.headers.authorization || req.headers.Authorization;
-        console.log("Header", header);
 
         if (!header || typeof header !== "string" || !header.startsWith("Bearer ")) {
             return res.status(401).json({ message: "Missing or invalid Authorization header" });
         }
 
         const token = header.substring("Bearer ".length).trim();
-        console.log("Token", token);
 
         if (!token) {
             return res.status(401).json({ message: "Token missing" });
         }
 
-        console.log("JWTSECRET", JWT_SECRET);
         const decoded = jwt.verify(token, JWT_SECRET) as TokenPayload;
-
-        console.log("Decoded", decoded);
 
 
         // מצמידים את פרטי המשתמש לבקשה
@@ -46,7 +41,6 @@ export default function auth(req: Request, res: Response, next: NextFunction) {
 
         return next();
     } catch (err: any) {
-        console.log("Errorr", err);
 
         // תוקף פג / טוקן לא חוקי
         return res.status(401).json({ message: "Invalid or expired token" });

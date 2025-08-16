@@ -25,8 +25,6 @@ app.use("/api/cards", cardsRouter);
 
 /** Health check */
 app.get("/health", (_req, res) => {
-    console.log("HEALTH");
-
     res.json({ status: "OK" });
 });
 
